@@ -191,7 +191,8 @@ function shell(size, label, body) {
       }
 
       .size-sm .upcoming .holiday-row:nth-child(n + 3),
-      .size-md .upcoming .holiday-row:nth-child(n + 5) {
+      .size-md .upcoming .holiday-row:nth-child(n + 5),
+      .size-lg .upcoming .holiday-row:nth-child(n + 4) {
         display: none;
       }
 

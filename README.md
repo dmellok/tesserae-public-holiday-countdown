@@ -65,8 +65,8 @@ http://127.0.0.1:8765/_test/render?plugin=public_holiday_countdown&size=md
   "tesserae_compat": "1.x",
   "screenshot_sizes": ["lg"],
   "release": {
-    "version": "0.1.0",
-    "tarball_url": "https://github.com/your-handle/tesserae-public-holiday-countdown/archive/refs/tags/v0.1.0.tar.gz",
+    "version": "0.1.1",
+    "tarball_url": "https://github.com/your-handle/tesserae-public-holiday-countdown/archive/refs/tags/v0.1.1.tar.gz",
     "sha256": "..."
   },
   "source": "https://github.com/your-handle/tesserae-public-holiday-countdown"

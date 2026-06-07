@@ -1,0 +1,40 @@
+{
+  "tesserae_compat": "1.x",
+  "name": "Public Holiday Countdown",
+  "version": "0.1.0",
+  "kind": "widget",
+  "description": "Countdown to the next public holiday, with a short upcoming list.",
+  "icon": "ph-calendar-star",
+  "supports": {
+    "sizes": ["xs", "sm", "md", "lg"]
+  },
+  "cell_options": [
+    {
+      "name": "country_code",
+      "type": "string",
+      "label": "Country code",
+      "default": "US"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "label": "Place label",
+      "default": "United States"
+    },
+    {
+      "name": "region_code",
+      "type": "string",
+      "label": "Region code",
+      "default": ""
+    },
+    {
+      "name": "count",
+      "type": "number",
+      "label": "Upcoming holidays",
+      "default": 4
+    }
+  ],
+  "render": {
+    "needs_network": true
+  }
+}

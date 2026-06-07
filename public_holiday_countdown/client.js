@@ -32,6 +32,10 @@ function shell(size, label, body) {
 
       .holiday-body {
         display: grid;
+        /* Single column at full cell width, otherwise the column sizes
+           to its widest child and short holiday names (AU "King's
+           Birthday") leave the layout collapsed to a sliver. */
+        grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto minmax(0, 1fr);
         gap: var(--space-4, 1.25em);
         min-height: 0;
@@ -58,15 +62,20 @@ function shell(size, label, body) {
         font-variant-numeric: tabular-nums;
       }
 
+      /* Container-query-driven sizing tuned per-cell so the widget
+         doesn't blow out at md (where the Spectra --fs-display * base
+         scale lands at ~84px and crowds out the list). Floors are set
+         for sm where cqmin is small; ceilings keep lg from getting
+         silly. Same approach weather_now's wx-temp uses. */
       .days strong {
-        font-size: clamp(48px, 24cqmin, 176px);
+        font-size: clamp(2.6em, 14cqmin, 4.5em);
         line-height: .85;
         font-weight: var(--fw-black, 900);
         letter-spacing: 0;
       }
 
       .days span {
-        font-size: clamp(13px, 4cqmin, 28px);
+        font-size: clamp(0.7em, 2cqmin, 1em);
         font-weight: var(--fw-bold, 800);
         color: var(--text-secondary);
         text-transform: var(--label-transform, uppercase);
@@ -75,16 +84,16 @@ function shell(size, label, body) {
       .next-name {
         margin-top: var(--space-2, .5em);
         color: var(--text-primary);
-        font-size: clamp(18px, 6cqmin, 52px);
-        line-height: .98;
-        font-weight: var(--fw-black, 900);
+        font-size: clamp(0.95em, 3cqmin, 1.6em);
+        line-height: 1.1;
+        font-weight: var(--fw-bold, 800);
         overflow-wrap: anywhere;
       }
 
       .next-date {
-        margin-top: var(--space-2, .5em);
+        margin-top: var(--space-1, .25em);
         color: var(--text-muted);
-        font-size: clamp(11px, 2.5cqmin, 18px);
+        font-size: clamp(0.65em, 1.6cqmin, 0.9em);
         font-weight: var(--fw-semi, 700);
         text-transform: var(--label-transform, uppercase);
       }
@@ -92,15 +101,15 @@ function shell(size, label, body) {
       .hero-icon {
         display: grid;
         place-items: center;
-        inline-size: clamp(56px, 24cqmin, 180px);
-        block-size: clamp(56px, 24cqmin, 180px);
+        inline-size: clamp(48px, 10cqmin, 96px);
+        block-size: clamp(48px, 10cqmin, 96px);
         color: var(--accent-4);
         background: var(--accent-4-soft);
         border-radius: var(--pill-radius, var(--radius-0, 0));
       }
 
       .hero-icon i {
-        font-size: clamp(38px, 15cqmin, 118px);
+        font-size: clamp(28px, 6cqmin, 56px);
         line-height: 1;
       }
 
@@ -131,26 +140,32 @@ function shell(size, label, body) {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-size: clamp(0.78em, 1.8cqmin, 1em);
         font-weight: var(--fw-bold, 800);
       }
 
       .row-date {
         color: var(--text-secondary);
-        font-size: var(--fs-label, .8em);
+        font-size: clamp(0.65em, 1.4cqmin, 0.85em);
         font-weight: var(--fw-semi, 700);
         font-variant-numeric: tabular-nums;
+      }
+
+      .holiday-row {
+        padding-block: clamp(.3em, .8cqmin, .55em);
       }
 
       .pill-days {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-inline-size: 3.25em;
-        padding: .2em .55em;
+        min-inline-size: 2.6em;
+        padding: .15em .5em;
         color: var(--on-accent);
         background: var(--accent-4);
         border-radius: var(--pill-radius, var(--radius-0, 0));
-        font-weight: var(--fw-black, 900);
+        font-size: clamp(0.7em, 1.6cqmin, 0.9em);
+        font-weight: var(--fw-bold, 800);
         font-variant-numeric: tabular-nums;
       }
 
@@ -190,9 +205,12 @@ function shell(size, label, body) {
         display: none;
       }
 
-      .size-sm .upcoming .holiday-row:nth-child(n + 3),
-      .size-md .upcoming .holiday-row:nth-child(n + 5),
-      .size-lg .upcoming .holiday-row:nth-child(n + 4) {
+      /* Hard cap visible rows per cell size so the auto-sized list
+         row never tries to render more than the cell can actually
+         show. xs hides the whole list (size-xs rule above). */
+      .size-sm .upcoming .holiday-row:nth-child(n + 2),
+      .size-md .upcoming .holiday-row:nth-child(n + 2),
+      .size-lg .upcoming .holiday-row:nth-child(n + 6) {
         display: none;
       }
 

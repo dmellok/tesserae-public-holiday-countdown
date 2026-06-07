@@ -1,12 +1,17 @@
 {
   "tesserae_compat": "1.x",
   "name": "Public Holiday Countdown",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "kind": "widget",
   "description": "Countdown to the next public holiday, with a short upcoming list.",
   "icon": "ph-calendar-star",
   "supports": {
-    "sizes": ["xs", "sm", "md", "lg"]
+    "sizes": [
+      "xs",
+      "sm",
+      "md",
+      "lg"
+    ]
   },
   "cell_options": [
     {
@@ -36,5 +41,8 @@
   ],
   "render": {
     "needs_network": true
-  }
+  },
+  "requires": [
+    "network:date.nager.at"
+  ]
 }
